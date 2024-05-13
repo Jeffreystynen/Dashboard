@@ -33,7 +33,7 @@ def index():
         pmids, total_count = search_pubmed(condition, search_terms, selected_article_types)
         
         # Save all results to a pickle file
-        with open('pubmed_search_results.pkl', 'wb') as f:
+        with open('data/pubmed_search_results.pkl', 'wb') as f:
             pickle.dump(pmids, f)
         
         # Limit display to first 15 PMIDs
