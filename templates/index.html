@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PubMed Search Dashboard</title>
+</head>
+<body>
+    <h1>Search PubMed</h1>
+    <form action="/" method="post">
+        <label for="condition">Condition:</label>
+        <input type="text" id="condition" name="condition" required>
+        
+        <label for="search_terms">Search Terms:</label>
+        <input type="text" id="search_terms" name="search_terms" required>
+
+        <fieldset>
+            <legend>Select Article Types:</legend>
+            <input type="checkbox" id="rct" name="article_types" value="Randomized Controlled Trial[pt]">
+            <label for="rct">Randomized Controlled Trial</label><br>
+            
+            <input type="checkbox" id="ct" name="article_types" value="Clinical Trial[pt]">
+            <label for="ct">Clinical Trial</label><br>
+            
+            <input type="checkbox" id="ma" name="article_types" value="Meta-Analysis[pt]">
+            <label for="ma">Meta-Analysis</label><br>
+            
+            <input type="checkbox" id="sr" name="article_types" value="Systematic Review[pt]">
+            <label for="sr">Systematic Review</label>
+        </fieldset>
+        
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Search Results</h2>
+        <p>Total papers found: {{ results.total_count }}</p>
+        <ul>
+        {% for pmid in results.pmids %}
+            <li>{{ pmid }}</li>
+        {% endfor %}
+        </ul>
+        {% if show_download %}
+            <a href="/download"><button>Download Full Results</button></a>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
